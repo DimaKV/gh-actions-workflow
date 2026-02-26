@@ -20,6 +20,14 @@ export const TodoList = () => {
     ]);
   };
 
+  const handleChangeStatus = (id: number) => {
+    setList(
+      list.map((todo) =>
+        todo.id === id ? { ...todo, ready: !todo.ready } : todo,
+      ),
+    );
+  };
+
   return (
     <div>
       <div>
@@ -29,10 +37,16 @@ export const TodoList = () => {
         <ul>
           {list.map((todo) => {
             const classItem = todo.ready
-              ? "line-through text-gray-500"
-              : "text-green-600";
+              ? "line-through text-gray-500 flex items-center gap-2"
+              : "text-green-600 flex items-center gap-2";
             return (
               <li key={todo.id} className={classItem}>
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  checked={todo.ready}
+                  onChange={() => handleChangeStatus(todo.id)}
+                />
                 {todo.name}
               </li>
             );
