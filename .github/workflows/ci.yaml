@@ -32,12 +32,12 @@ jobs:
       - run: npm install
       - run: npm run build # Собираем приложение
 
-      - uses: actions/upload-artifact@v3 # Сохраняем сборку
+      - uses: actions/upload-artifact@v4 # Сохраняем сборку
         with:
           name: build
           path: build/
 
-      - uses: peaceiris/actions-gh-pages@v3 # Деплоим на GitHub Pages
+      - uses: peaceiris/actions-gh-pages@v4 # Деплоим на GitHub Pages
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
