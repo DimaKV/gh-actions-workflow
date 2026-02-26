@@ -18,3 +18,26 @@ jobs:
       - run: npm install
       - run: npm test
       - run: npm test -- --coverage # Добавляем отчёт о покрытии кода тестами
+
+  deploy:
+    needs: test # Запускается только если тесты прошли успешно
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' # Деплоим только из ветки main
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+      - run: npm install
+      - run: npm run build # Собираем приложение
+
+      - uses: actions/upload-artifact@v3 # Сохраняем сборку
+        with:
+          name: build
+          path: build/
+
+      - uses: peaceiris/actions-gh-pages@v3 # Деплоим на GitHub Pages
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
