@@ -5,7 +5,7 @@ export const Counter = () => {
 
   return (
     <button onClick={() => setCount((count) => count + 1)}>
-      Total is {count}
+      count is {count}
     </button>
   );
 };
