@@ -10,4 +10,5 @@ export default defineConfig({
     environment: "jsdom", // Эмуляция браузера
     setupFiles: "./src/setupTests.ts", // Файл настройки перед тестами
   },
+  base: "/gh-actions-workflow/", // ← Важно: имя вашего репозитория
 });
